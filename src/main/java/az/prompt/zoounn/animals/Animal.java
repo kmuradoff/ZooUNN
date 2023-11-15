@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import static az.prompt.zoounn.AnimalClassEnum.PREDATOR;
-
 @Getter
 @Setter
 @Slf4j
@@ -14,6 +12,7 @@ public class Animal {
     private String animalName;
     private AnimalClassEnum animalClass;
     private String animalType;
+    private int cellNumber;
 
     public Animal(String animalName, AnimalClassEnum animalClass, String animalType) {
         this.animalName = animalName;
@@ -26,7 +25,6 @@ public class Animal {
     }
 
     public boolean isPredator() {
-        return animalClass == PREDATOR;
+        return animalClass == AnimalClassEnum.PREDATOR;
     }
-
 }

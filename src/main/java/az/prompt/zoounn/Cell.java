@@ -17,6 +17,7 @@ import java.util.List;
 public class Cell {
     private static final int MAX_SIZE = 4;
 
+    private long id;
     private int number;
     private List<Animal> animals = new ArrayList<>(MAX_SIZE);
 

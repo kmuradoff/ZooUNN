@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @Entity
 @NoArgsConstructor
+@Table(name = "animal_jpa")
 public class AnimalJpa {
 
     @Id
@@ -20,10 +21,13 @@ public class AnimalJpa {
     private Long id;
     private String animalName;
 
+
     @Enumerated(EnumType.STRING)
     private AnimalClassEnum animalClass;
+
     private String animalType;
 
     @ManyToOne
     private CellJpa cell;
+
 }

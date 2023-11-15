@@ -31,18 +31,17 @@ public class ZooUnnApplication extends Application {
 
     public static void main(String[] args) {
         Application.launch(args);
-
     }
 
     @Override
     public void init() throws BaseException {
         SpringApplication.run(getClass()).getAutowireCapableBeanFactory().autowireBean(this);
-        zooController.initZoo();
-
+        //zooController.initZoo();
+        dataBaseService.backup();
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Parent zooPane = loadFxml("/fxml/zoo.fxml", zooController);
         Pane root = (Pane) zooPane.lookup("#zooPane");
 
@@ -52,7 +51,7 @@ public class ZooUnnApplication extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        dataBaseService.save();
+        //dataBaseService.save();
     }
 
     public Parent loadFxml(String view, Object controller) {

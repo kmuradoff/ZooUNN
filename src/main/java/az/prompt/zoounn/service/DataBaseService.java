@@ -2,16 +2,18 @@ package az.prompt.zoounn.service;
 
 import az.prompt.zoounn.Cell;
 import az.prompt.zoounn.Zoo;
+import az.prompt.zoounn.mapper.AnimalMapper;
 import az.prompt.zoounn.mapper.CellMapper;
+import az.prompt.zoounn.model.AnimalJpa;
 import az.prompt.zoounn.model.CellJpa;
 import az.prompt.zoounn.repository.AnimalJpaRepository;
 import az.prompt.zoounn.repository.CellJpaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,16 +22,22 @@ public class DataBaseService {
     private final AnimalJpaRepository animalRepository;
 
     private final CellMapper cellMapper;
+    private final AnimalMapper animalMapper;
     private final Zoo zoo;
 
+    @Transactional
     public void save() {
-        Set<Cell> cellList = zoo.getCells();
+        for (Cell cell : zoo.getCells()) {
+            CellJpa cellJpa = cellMapper.fromCell(cell);
+            cellRepository.save(cellJpa);
 
-        List<CellJpa> cellJpas = new ArrayList<>();
-        for (Cell cell : cellList)
-            cellJpas.add(cellMapper.fromCell(cell));
+            List<AnimalJpa> animalJpaList = cell.getAnimals().stream()
+                    .map(animalMapper::fromAnimal)
+                    .peek(animal -> animal.setCell(cellJpa))
+                    .collect(Collectors.toList());
 
-        cellRepository.saveAll(cellJpas);
+            animalRepository.saveAll(animalJpaList);
+        }
     }
 
     public void backup() {

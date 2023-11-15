@@ -13,12 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
@@ -30,6 +32,12 @@ public class ZooController implements Initializable {
     public Button walk_in_zoo;
     @FXML
     public Button shop;
+    @FXML
+    public Text herbivore_count;
+    @FXML
+    public Text predator_count;
+    @FXML
+    public Text unique_animals;
 
     private Stage stage = null;
     private Parent myNewScene = null;
@@ -37,6 +45,10 @@ public class ZooController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        predator_count.setText(String.format("Predator count: %d", zoo.countPredators()));
+        herbivore_count.setText(String.format("Herbivore count: %d", zoo.countPredators()));
+        unique_animals.setText(String.format("Unique animals: %s", zoo.uniqueAnimalType()));
 
 
         walk_in_zoo.setOnAction(event -> {
@@ -47,7 +59,7 @@ public class ZooController implements Initializable {
         shop.setOnAction(actionEvent -> {
             stage = (Stage) shop.getScene().getWindow();
             try {
-                myNewScene = FXMLLoader.load(getClass().getResource("/fxml/shop.fxml"));
+                myNewScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/shop.fxml")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

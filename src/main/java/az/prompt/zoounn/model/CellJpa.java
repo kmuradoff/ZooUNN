@@ -1,11 +1,6 @@
 package az.prompt.zoounn.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +12,13 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "cell_jpa")
 public class CellJpa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private int number;
-    @OneToMany(mappedBy = "cell", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cell", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AnimalJpa> animals = new ArrayList<>();
 }

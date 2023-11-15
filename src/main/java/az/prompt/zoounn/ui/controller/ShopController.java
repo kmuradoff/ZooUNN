@@ -1,6 +1,7 @@
 package az.prompt.zoounn.ui.controller;
 
 import az.prompt.zoounn.ZooUnnApplication;
+import az.prompt.zoounn.service.DataBaseService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,27 +29,22 @@ public class ShopController implements Initializable {
     Button cage_animal;
 
     @Autowired
-    ZooUnnApplication zooUnnApplication;
-
-    @Autowired
-    CellController cellController;
+    DataBaseService dataBaseService;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         show_zoo.setOnAction(event -> {
-/*            Stage stage = (Stage) show_zoo.getScene().getWindow();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("/fxml/cell.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Zoo UNN");
-            stage.show();*/
+        });
 
+        cage_animal.setOnAction(actionEvent -> {
+            //todo
+            dataBaseService.save();
+        });
+
+        buy_cell.setOnAction(actionEvent -> {
+            //todo
+            dataBaseService.save();
         });
     }
 }
