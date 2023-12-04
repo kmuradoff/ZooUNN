@@ -27,17 +27,10 @@ public class DataBaseService {
 
     @Transactional
     public void save() {
-        for (Cell cell : zoo.getCells()) {
-            CellJpa cellJpa = cellMapper.fromCell(cell);
-            cellRepository.save(cellJpa);
-
-            List<AnimalJpa> animalJpaList = cell.getAnimals().stream()
-                    .map(animalMapper::fromAnimal)
-                    .peek(animal -> animal.setCell(cellJpa))
-                    .collect(Collectors.toList());
-
-            animalRepository.saveAll(animalJpaList);
-        }
+        cellRepository.saveAll(zoo.getCells().stream()
+                .map(cellMapper::fromCell)
+                .peek(cellJpa -> cellJpa.getAnimals().forEach(animalJpa -> animalJpa.setCell(cellJpa)))
+                .toList());
     }
 
     public void backup() {

@@ -1,6 +1,5 @@
 package az.prompt.zoounn.model;
 
-
 import az.prompt.zoounn.AnimalClassEnum;
 import jakarta.persistence.*;
 import lombok.Getter;

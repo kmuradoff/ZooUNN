@@ -17,8 +17,8 @@ public class CellJpa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private int number;
+
     @OneToMany(mappedBy = "cell", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AnimalJpa> animals = new ArrayList<>();
 }

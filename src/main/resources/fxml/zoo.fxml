@@ -10,9 +10,9 @@
               <Button fx:id="shop" text="Shop" />
           </HBox>
 
-    <VBox alignment="BOTTOM_LEFT" spacing="16" VBox.vgrow="NEVER">
-        <Text fx:id="herbivore_count">Herbivore count: </Text>
-        <Text fx:id="predator_count">Predator count: </Text>
-        <Text fx:id="unique_animals">Unique animals: </Text>
-    </VBox>
+        <VBox alignment="BOTTOM_LEFT" spacing="16" VBox.vgrow="NEVER">
+            <Text fx:id="herbivore_count">Herbivore count: </Text>
+            <Text fx:id="predator_count">Predator count: </Text>
+            <Text fx:id="unique_animals">Unique animals: </Text>
+        </VBox>
 </VBox>

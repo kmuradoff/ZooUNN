@@ -7,6 +7,8 @@ import az.prompt.zoounn.animals.Lion;
 import az.prompt.zoounn.animals.Rabbit;
 import az.prompt.zoounn.animals.Tiger;
 import az.prompt.zoounn.exceptions.BaseException;
+import az.prompt.zoounn.service.DataBaseService;
+import az.prompt.zoounn.service.ZooImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +27,13 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
+@Slf4j
 public class ZooController implements Initializable {
+    @Autowired
+    private Zoo zoo = new ZooImpl();
 
     @Autowired
-    private Zoo zoo;
+    private DataBaseService dataBaseService;
     @FXML
     public Button walk_in_zoo;
     @FXML
@@ -38,14 +44,12 @@ public class ZooController implements Initializable {
     public Text predator_count;
     @FXML
     public Text unique_animals;
-
     private Stage stage = null;
     private Parent myNewScene = null;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         predator_count.setText(String.format("Predator count: %d", zoo.countPredators()));
         herbivore_count.setText(String.format("Herbivore count: %d", zoo.countPredators()));
         unique_animals.setText(String.format("Unique animals: %s", zoo.uniqueAnimalType()));
@@ -69,8 +73,6 @@ public class ZooController implements Initializable {
             stage.setTitle("Zoo UNN Shop");
             stage.show();
         });
-
-
     }
 
     public void initZoo() throws BaseException {
@@ -86,5 +88,8 @@ public class ZooController implements Initializable {
         zoo.addAnimal(new Deer(), 1);
         zoo.addAnimal(new Deer(), 1);
         zoo.addAnimal(new Rabbit(), 1);
+
+        dataBaseService.save();
+
     }
 }

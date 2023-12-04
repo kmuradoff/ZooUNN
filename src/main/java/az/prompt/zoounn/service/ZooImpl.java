@@ -18,9 +18,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ZooImpl implements Zoo {
-    private Set<Cell> cells = new HashSet<>();
 
-    private final CellJpaRepository cellRepository;
+    private Set<Cell> cells = new HashSet<>();
 
     @Override
     public void addCell(Cell cell) throws BaseException {

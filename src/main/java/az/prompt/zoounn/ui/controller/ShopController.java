@@ -2,23 +2,26 @@ package az.prompt.zoounn.ui.controller;
 
 import az.prompt.zoounn.ZooUnnApplication;
 import az.prompt.zoounn.service.DataBaseService;
+import az.prompt.zoounn.util.ZooUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
 public class ShopController implements Initializable {
-
     @FXML
     Button buy_cell;
 
@@ -31,6 +34,12 @@ public class ShopController implements Initializable {
     @Autowired
     DataBaseService dataBaseService;
 
+    @Autowired
+    private ZooController zooController;
+
+    @Autowired
+    private ZooUtils zooUtils = new ZooUtils();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,13 +47,10 @@ public class ShopController implements Initializable {
         });
 
         cage_animal.setOnAction(actionEvent -> {
-            //todo
-            dataBaseService.save();
         });
 
         buy_cell.setOnAction(actionEvent -> {
-            //todo
-            dataBaseService.save();
         });
     }
+
 }
