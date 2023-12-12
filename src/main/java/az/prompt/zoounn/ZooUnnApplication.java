@@ -2,6 +2,8 @@ package az.prompt.zoounn;
 
 import az.prompt.zoounn.exceptions.BaseException;
 import az.prompt.zoounn.service.DataBaseService;
+import az.prompt.zoounn.service.JsonService;
+import az.prompt.zoounn.service.ObjectSerializerService;
 import az.prompt.zoounn.ui.controller.CellController;
 import az.prompt.zoounn.ui.controller.ZooController;
 import az.prompt.zoounn.util.ZooUtils;
@@ -33,6 +35,12 @@ public class ZooUnnApplication extends Application {
     @Autowired
     private ZooUtils zooUtils;
 
+    @Autowired
+    private ObjectSerializerService objectSerializerService;
+
+    @Autowired
+    private JsonService jsonService;
+
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -42,7 +50,16 @@ public class ZooUnnApplication extends Application {
         SpringApplication.run(getClass()).getAutowireCapableBeanFactory().autowireBean(this);
         //zooController.initZoo();
 
-        dataBaseService.backup();
+        //dataBaseService.save();
+        //dataBaseService.backup();
+
+        //objectSerializerService.save();
+        //objectSerializerService.backup();
+
+        //jsonService.save();
+        jsonService.backup();
+
+
     }
 
     @Override

@@ -29,11 +29,6 @@ import java.util.ResourceBundle;
 @Component
 @Slf4j
 public class ZooController implements Initializable {
-    @Autowired
-    private Zoo zoo = new ZooImpl();
-
-    @Autowired
-    private DataBaseService dataBaseService;
     @FXML
     public Button walk_in_zoo;
     @FXML
@@ -44,6 +39,10 @@ public class ZooController implements Initializable {
     public Text predator_count;
     @FXML
     public Text unique_animals;
+    @Autowired
+    private Zoo zoo = new ZooImpl();
+    @Autowired
+    private DataBaseService dataBaseService;
     private Stage stage = null;
     private Parent myNewScene = null;
 
@@ -75,21 +74,23 @@ public class ZooController implements Initializable {
         });
     }
 
-    public void initZoo() throws BaseException {
-        zoo.addCell(new Cell(0));
-        zoo.addCell(new Cell(1));
+    public void initZoo() {
+        try {
+            zoo.addCell(new Cell(0));
+            zoo.addCell(new Cell(1));
 
-        zoo.addAnimal(new Lion(), 0);
-        zoo.addAnimal(new Lion(), 0);
-        zoo.addAnimal(new Tiger(), 0);
-        zoo.addAnimal(new Tiger(), 0);
+            zoo.addAnimal(new Lion(), 0);
+            zoo.addAnimal(new Lion(), 0);
+            zoo.addAnimal(new Tiger(), 0);
+            zoo.addAnimal(new Tiger(), 0);
 
-        zoo.addAnimal(new Rabbit(), 1);
-        zoo.addAnimal(new Deer(), 1);
-        zoo.addAnimal(new Deer(), 1);
-        zoo.addAnimal(new Rabbit(), 1);
-
+            zoo.addAnimal(new Rabbit(), 1);
+            zoo.addAnimal(new Deer(), 1);
+            zoo.addAnimal(new Deer(), 1);
+            zoo.addAnimal(new Rabbit(), 1);
+        } catch (BaseException e) {
+            throw new RuntimeException(e);
+        }
         dataBaseService.save();
-
     }
 }

@@ -8,12 +8,15 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @Slf4j
-public class Cell {
+public class Cell implements Serializable {
     private static final int MAX_SIZE = 4;
 
     private long id;
@@ -32,10 +35,10 @@ public class Cell {
     }
 
     public List<String> hearAnimals() {
-        List<String> sounds = new ArrayList<>();
-        for (Animal animal : animals)
-            sounds.add(animal.makeSound());
-        return sounds;
+        return animals.stream()
+                .map(Animal::makeSound)
+                .collect(Collectors.toList());
+
     }
 
     public Cell(int number) {
