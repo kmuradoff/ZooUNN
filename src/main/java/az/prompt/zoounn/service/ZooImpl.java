@@ -4,21 +4,15 @@ import az.prompt.zoounn.Cell;
 import az.prompt.zoounn.Zoo;
 import az.prompt.zoounn.animals.Animal;
 import az.prompt.zoounn.exceptions.BaseException;
-import az.prompt.zoounn.repository.CellJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ZooImpl implements Zoo {
-
     private Set<Cell> cells = new HashSet<>();
 
     @Override
@@ -89,4 +83,6 @@ public class ZooImpl implements Zoo {
     public Set<Cell> getCells() {
         return cells;
     }
+
+
 }

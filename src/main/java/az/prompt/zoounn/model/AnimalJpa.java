@@ -14,18 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Table(name = "animal_jpa")
 public class AnimalJpa {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String animalName;
-
-
     @Enumerated(EnumType.STRING)
     private AnimalClassEnum animalClass;
-
     private String animalType;
-
     @ManyToOne
     private CellJpa cell;
 

@@ -16,4 +16,5 @@ public interface Zoo {
     long countHerbivores();
     long countPredators();
     Set<Cell> getCells();
+
 }
